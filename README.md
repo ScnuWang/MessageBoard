@@ -14,3 +14,8 @@
 - [ ]  查看留言;
 - [ ]  随机展示留言;
 
+2. 技术栈
+
+Truffle + Etherum + Solidity + Web3js + jQuery
+
+
