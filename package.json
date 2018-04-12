@@ -14,13 +14,10 @@
     "url": "git+https://github.com/ScnuWang/MessageBoard.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "jason <scnu_wang@163.com>",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://github.com/ScnuWang/MessageBoard/issues"
   },
-  "homepage": "https://github.com/ScnuWang/MessageBoard#readme",
-  "dependencies": {
-    "zeppelin-solidity": "1.8.0"
-  }
+  "homepage": "https://github.com/ScnuWang/MessageBoard#readme"
 }
