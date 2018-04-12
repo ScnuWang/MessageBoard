@@ -22,6 +22,7 @@ Truffle + Etherum + Solidity + Web3js + jQuery
 
 
 
+
 ## 特别提示：
 
     本项目纯属自娱自乐，最后只会部署在测试链上，因为没钱放主链上,最最最重要的是:不搞ICO,不搞ICO,不搞ICO。
