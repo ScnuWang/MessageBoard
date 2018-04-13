@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/ScnuWang/MessageBoard/issues"
   },
-  "homepage": "https://github.com/ScnuWang/MessageBoard#readme"
+  "homepage": "https://github.com/ScnuWang/MessageBoard#readme",
+  "dependencies": {
+    "truffle-contract": "^3.0.4",
+    "web3": "^1.0.0-beta.33"
+  }
 }
