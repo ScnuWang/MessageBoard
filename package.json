@@ -23,7 +23,8 @@
   "homepage": "https://github.com/ScnuWang/MessageBoard#readme",
   "dependencies": {
     "truffle-contract": "^3.0.4",
-    "web3": "^1.0.0-beta.33"
+    "web3": "^1.0.0-beta.33",
+    "zeppelin-solidity": "1.8.0"
   },
   "devDependencies": {
     "lite-server": "^2.3.0"
