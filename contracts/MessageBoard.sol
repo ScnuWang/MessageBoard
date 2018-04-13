@@ -3,6 +3,11 @@ pragma solidity ^0.4.17;
 
 contract MessageBoardToken is StandardToken {
 
+  /*
+      Token 基于 ERC20
+
+
+   */
   string public constant name = "MessageBoardToken"; // solium-disable-line uppercase
   string public constant symbol = "MBT"; // solium-disable-line uppercase
   uint8 public constant decimals = 5; // solium-disable-line uppercase
@@ -29,9 +34,5 @@ contract MessageBoardToken is StandardToken {
 
 
 contract MessageBoard {
-  /*
-      Token 基于 ERC20
 
-
-   */
 }
