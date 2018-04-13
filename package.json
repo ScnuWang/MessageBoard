@@ -24,5 +24,8 @@
   "dependencies": {
     "truffle-contract": "^3.0.4",
     "web3": "^1.0.0-beta.33"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
   }
 }
