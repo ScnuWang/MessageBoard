@@ -3,7 +3,7 @@ App = {
   contracts: {},
 
   init: function() {
-    // Load pets.
+    // Load message.
     $.getJSON('../pets.json', function(data) {
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
@@ -29,7 +29,7 @@ App = {
       App.web3Provider = web3.currentProvider;
     } else {
       // If no injected web3 instance is detected, fall back to Ganache
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
     }
     web3 = new Web3(App.web3Provider);
 
@@ -37,34 +37,34 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON('Adoption.json', function(data) {
+    $.getJSON('MessageBoard.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract
-      var AdoptionArtifact = data;
-      App.contracts.Adoption = TruffleContract(AdoptionArtifact);
+      var MessageBoardArtifact = data;
+      App.contracts.Adoption = TruffleContract(MessageBoardArtifact);
 
       // Set the provider for our contract
       App.contracts.Adoption.setProvider(App.web3Provider);
 
       // Use our contract to retrieve and mark the adopted pets
-      return App.markAdopted();
+      return App.markLeaveMessage();
     });
 
     return App.bindEvents();
   },
 
   bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    $(document).on('click', '#leavemessage', App.handleLeaveMessage);
   },
 
-  markAdopted: function(adopters, account) {
-    var adoptionInstance;
+  markLeaveMessage: function(messagers, account) {
+    var leaveMessageInstance;
 
     App.contracts.Adoption.deployed().then(function(instance) {
-      adoptionInstance = instance;
+      leaveMessageInstance = instance;
 
-      return adoptionInstance.getAdopters.call();
-    }).then(function(adopters) {
-      for (i = 0; i < adopters.length; i++) {
+      return leaveMessageInstance.getMessagers.call();
+    }).then(function(messagers) {
+      for (i = 0; i < messagers.length; i++) {
         if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
           $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
         }
@@ -74,10 +74,10 @@ App = {
     });
   },
 
-  handleAdopt: function(event) {
+  handleLeaveMessage: function(event) {
     event.preventDefault();
 
-    var petId = parseInt($(event.target).data('id'));
+    var text = parseString($(event.target).text);
 
     var adoptionInstance;
 
