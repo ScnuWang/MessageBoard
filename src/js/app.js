@@ -3,23 +3,7 @@ App = {
   contracts: {},
 
   init: function() {
-    // Load message.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
-
-      for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
-        petsRow.append(petTemplate.html());
-      }
-    });
-
+    // 初始化Web3
     return App.initWeb3();
   },
 
@@ -32,18 +16,22 @@ App = {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
     }
     web3 = new Web3(App.web3Provider);
+    //这里的 web3 是否需要调用，在哪里调用的？ 应该暂时还没有调用的
+
 
     return App.initContract();
   },
 
   initContract: function() {
+
     $.getJSON('MessageBoard.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract
       var MessageBoardArtifact = data;
-      App.contracts.Adoption = TruffleContract(MessageBoardArtifact);
+
+      App.contracts.MessageBoard = TruffleContract(MessageBoardArtifact);
 
       // Set the provider for our contract
-      App.contracts.Adoption.setProvider(App.web3Provider);
+      App.contracts.MessageBoard.setProvider(App.web3Provider);
 
       // Use our contract to retrieve and mark the adopted pets
       return App.markLeaveMessage();
@@ -65,8 +53,8 @@ App = {
       return leaveMessageInstance.getMessagers.call();
     }).then(function(messagers) {
       for (i = 0; i < messagers.length; i++) {
-        if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
-          $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
+        if (adopters[i] !== '0x0000000000000000000000000000000000000000') {// 判断是否是僵尸地址，这被称作 “烧币”, 就是把代币转移到一个谁也没有私钥的地址，让这个代币永远也无法恢复
+          $('#leavemessage').attr('disabled', true);
         }
       }
     }).catch(function(err) {
