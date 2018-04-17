@@ -25,5 +25,3 @@ Truffle + Etherum + Solidity + Web3js + jQuery
 ## 特别提示：
 
     不搞ICO，不当韭菜
-
-
