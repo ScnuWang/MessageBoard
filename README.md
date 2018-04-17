@@ -18,8 +18,7 @@
 Truffle + Etherum + Solidity + Web3js + jQuery
 
 
-
-
+3. 更多详情内容，请看本项目的wiki
 
 
 ## 特别提示：
