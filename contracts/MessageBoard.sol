@@ -1,4 +1,5 @@
 pragma solidity ^0.4.17;
+import 'zeppelin-solidity/contracts/token/ERC20/StandardToken.sol';
 
 
 contract MessageBoard is StandardToken {
@@ -13,23 +14,25 @@ contract MessageBoard is StandardToken {
   /// 最多小数位数
   uint8 public constant decimals = 5;
   /// 账户初始化领取TOKEN
-  uint256 public constant ACCOUNT_INITIAL_SUPPLY = 520.1314;
+  uint256 public constant ACCOUNT_INITIAL_SUPPLY = 52013140;
   /// 合约总的TOKEN数
-  uint256 public constant INITIAL_SUPPLY = 5201314;
+  uint256 public constant INITIAL_SUPPLY = 520131400000;
   /// 每次留言所需消耗的TOKEN
-  uint256 public constant NEED_TOKEN = 52.01314;
+  uint256 public constant NEED_TOKEN = 5201314;
 
 
   // 根据地址查询余额
   mapping(address => uint) public accountBalance;
+
+
   // 永久保存已经领取过TOKEN的账户
-  address[] storage  accounts;
+  address[] hadGetTokenAccounts;
 
   /// @dev 判断是否已经领取过TOKEN
   function hadGetToken(address _account) public returns(bool) {
-    uint length = accounts.length;
+    uint length = hadGetTokenAccounts.length;
     for(uint i = 0; i < length; i++){
-        if(_acount == accounts[i]) {
+        if(_account == hadGetTokenAccounts[i]) {
             return true;
         }
     }
@@ -39,9 +42,11 @@ contract MessageBoard is StandardToken {
   /// @dev 领取TOKEN
   function getToken(address _account) public {
     // 判断是否已经领过
-    require(!hadGetToken(_acount));
+    require(!hadGetToken(_account));
     // 调用StandardToken的transferFrom方法
     transferFrom(msg.sender,_account,ACCOUNT_INITIAL_SUPPLY);
+    // 将领取过的账户存入hadGetTokenAccounts
+    hadGetTokenAccounts.push(_account);
   }
 
   /// @dev 判断留言者是否有足够的MBT
