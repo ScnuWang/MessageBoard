@@ -15,27 +15,16 @@
       <div style="display:flex;justify-content:center;padding-top:5%">
         <div class="col-lg-6">
           <div class="input-group">
-            <input type="text" class="form-control">
+            <span class="label label-primary">昵 称：
+            <input type="text" neme="nickname"  class="form-control"></span>
+
+          留言内容：<input type="text" name="content" class="form-control">
             <span class="input-group-btn">
               <button id="leavemessage" class="btn btn-success" type="button">留 言</button>
             </span>
           </div>
         </div>
-        <button id="getToken" type="button" class="btn btn-success">领取MBT</button>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    当前余额
-                </h3>
-            </div>
-            <div class="panel-body">
-                <span id="MBTBalance">0.00000</span> MBT
-            </div>
-        </div>
       </div>
-
-
-
 
       <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

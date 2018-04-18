@@ -43,73 +43,18 @@ App = {
 
   bindEvents: function() {
     $(document).on('click', '#leavemessage', App.handleLeaveMessage);
-    $(document).on('click', '#getToken', App.handleGetToken);
   },
-  handleGetToken: function (event) {
-      event.preventDefault();
-      // 接收TOKEN的地址
-      // var address = ‘0x355a6303070bc068219da6128e8dc07506116475’；
-      console.log(event);
 
-      var messageboardinstance;
-
-      web3.eth.getAccounts(function(error, accounts) {
-        if (error) {
-          console.log(error);
-        }
-        // 默认
-        var account = accounts[0];
-        var address = accounts[1];
-
-        console.log("当前的账户地址是： "+ account);
-        App.contracts.MessageBoard.deployed().then(function(instance) {
-          messageboardinstance = instance;
-          // 调用合约中的getToken方法给接收地址转账
-          console.log("合约实例对象："+messageboardinstance);
-          return messageboardinstance.getToken(address);
-        }).then(function(result) {
-          alert('领取成功!');
-          //调用获取余额的方法
-          return App.getBalances();
-        }).catch(function(err) {
-          console.log(err.message);
-        });
-      });
-  },
-  getBalances: function() {
-    console.log('Getting balances...');
-
-    var messageboardinstance;
-
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
-      console.log("当前的账户地址是： "+ account);
-      App.contracts.MessageBoard.deployed().then(function(instance) {
-        messageboardinstance = instance;
-
-        console.log(account);
-        return messageboardinstance.balanceOf(account);
-      }).then(function(result) {
-        balance = result.c[0];
-        console.log(balance);
-        $('#MBTBalance').text(balance);
-      }).catch(function(err) {
-        console.log(err.message);
-      });
-    });
-  },
 
   handleLeaveMessage: function(event) {
     event.preventDefault();
 
-    var text = parseString($(event.target).text);
+    var messageBoardInstance;
 
-    var adoptionInstance;
-
+    var nickName = $('#nickname').val();
+    console.log("昵称： "+nickName);
+    var content = $('#content').val();
+    console.log("内容： "+content);
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
         console.log(error);
@@ -118,35 +63,14 @@ App = {
       var account = accounts[0];
 
       App.contracts.MessageBoard.deployed().then(function(instance) {
-        adoptionInstance = instance;
-
+        messageBoardInstance = instance;
         // Execute adopt as a transaction by sending account
-        return adoptionInstance.adopt(petId, {from: account});
-      }).then(function(result) {
-        return App.markAdopted();
+        return messageBoardInstance.setMessage(account,nickName,content);
       }).catch(function(err) {
         console.log(err.message);
       });
     });
-  },
-
-  markLeaveMessage: function(messagers, account) {
-    var leaveMessageInstance;
-
-    App.contracts.MessageBoard.deployed().then(function(instance) {
-      leaveMessageInstance = instance;
-
-      return leaveMessageInstance.getMessagers.call();
-    }).then(function(messagers) {
-      for (i = 0; i < messagers.length; i++) {
-        if (adopters[i] !== '0x0000000000000000000000000000000000000000') {// 判断是否是僵尸地址，这被称作 “烧币”, 就是把代币转移到一个谁也没有私钥的地址，让这个代币永远也无法恢复
-          $('#leavemessage').attr('disabled', true);
-        }
-      }
-    }).catch(function(err) {
-      console.log(err.message);
-    });
-  },
+  }
 
 };
 
