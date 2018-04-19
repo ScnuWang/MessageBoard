@@ -13,7 +13,7 @@ App = {
       App.web3Provider = web3.currentProvider;
     } else {
       // If no injected web3 instance is detected, fall back to Ganache
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      App.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/');
     }
     //这里的 web3 是否需要调用，在哪里调用的？ 应该暂时还没有调用的
     web3 = new Web3(App.web3Provider);
