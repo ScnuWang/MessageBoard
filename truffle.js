@@ -8,7 +8,7 @@ module.exports = {
       provider: function() {
         return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/pK6EEBFCyaazUzbfgzpy");// <acess token>通过注册inrura账户获取
       },
-      network_id: '3',
+      network_id: 3,
       gas: 3141592
     },
     development: {
