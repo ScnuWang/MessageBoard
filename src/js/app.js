@@ -12,7 +12,7 @@ App = {
     if (typeof web3 !== 'undefined') {
       App.web3Provider = web3.currentProvider;
     } else {
-      // 这里的地址不需要修改成Reposten测试网地址，因为Truffle.js里面已经配置了，这里根本不会执行下面这行代码
+      // 这里的地址不需要修改成Ropsten测试网地址，因为Truffle.js里面已经配置了，这里根本不会执行下面这代码
       App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
     }
     //这里的 web3 是否需要调用，在哪里调用的？这里是为了另外一个新用户访问应用的时候，重新注入一个新的web3的实例
